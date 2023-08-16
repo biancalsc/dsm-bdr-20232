@@ -1,5 +1,9 @@
 create database bd_aula03;
 
+\l;
+
+\c bd_aula03;
+
 create table tbl_cliente (
 	codigo_cliente integer primary key,
 	nome varchar(50) not null,
