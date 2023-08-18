@@ -17,3 +17,15 @@ create table tbl_titulo (
 	descricao varchar (20),
 	categoria varchar (10)
 );
+
+create table tbl_livros (
+	cod_livro integer primary key,
+	codigo_titulo integer,
+	status varchar (10)
+);
+
+create table tbl_emprestimo (
+	numero_emprestimo integer primary key,
+	codigo_cliente integer,
+	codigo_livro integer
+);
