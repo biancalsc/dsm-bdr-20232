@@ -29,3 +29,11 @@ create table tbl_emprestimo (
 	codigo_cliente integer,
 	codigo_livro integer
 );
+
+CREATE DOMAIN chk_status text check (value='disponivel' OR value='alugado');
+
+CREATE DOMAIN chk_categoria text check (value='drama' OR value='comedia');
+
+ALTER TABLE tbl_titulo ALTER COLUMN categoria SET DATA TYPE chk_categoria;
+
+ALTER TABLE tbl_livros ALTER COLUMN status SET DATA TYPE chk_status;
