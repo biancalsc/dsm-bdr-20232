@@ -40,3 +40,43 @@ VALUES
 (2,1,30),
 (3,2,10),
 (3,3,50);
+
+-- Listar o nome dos fornecedores(maiusculo) e das peças(minusculo) que se situam na mesma cidade, ordenado pelo nome.
+-- Resposta:
+
+SELECT tbl_fornecedor.nome, tbl_peca.nome
+FROM tbl_fornecedor
+INNER JOIN tbl_peca ON tbl_fornecedor.cidade = tbl_peca.cidade;
+------------------------------------------------------------------------------------
+--listar as cidades onde existem fornecedores (sem valores duplicados)
+-- Resposta:
+
+SELECT DISTINCT (tbl_fornecedor.cidade)
+FROM tbl_fornecedor;
+------------------------------------------------------------------------------------
+--Listar o nome e a cor das peças do fornecedor com código 3, ordenado pelo nome da peça
+-- Resposta:
+
+------------------------------------------------------------------------------------
+--Listar o nome e a cidade dos fornecedores com mais de 10 peças.Contar só as peças de código 1. 
+-- Resposta:
+
+------------------------------------------------------------------------------------
+--Listar a quantidade total de peças com código 1, fornecidas pelos fornecedores.
+-- Resposta:
+
+------------------------------------------------------------------------------------
+--Listar a média dos preços das peças fornecidas pelo fornecedor com código 3.
+-- Resposta:
+
+------------------------------------------------------------------------------------
+--lista o valor da pecas mais cara e a mais barata.
+-- Resposta:
+
+------------------------------------------------------------------------------------
+--listar a quantidade de peças cadastradas
+-- Resposta:
+
+------------------------------------------------------------------------------------
+--listar a quantidade de cidades diferentes onde existem peças cadastradas
+-- Resposta:
