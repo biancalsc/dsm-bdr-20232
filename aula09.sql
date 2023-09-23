@@ -2,10 +2,7 @@ CREATE DATABASE bd_aula09
 \c bd_aula09
 CREATE TABLE tbl_fornecedor (cod_fornecedor serial primary key, nome text not null, status integer, cidade text);
 CREATE TABLE tbl_peca (cod_peca serial primary key, nome text not null, cor text, preco numeric, cidade text);
-CREATE TABLE tbl_estoque (cod_compra serial primary key, 
-						 cod_fornecedor integer references tbl_fornecedor(cod_fornecedor),
-						cod_peca integer references tbl_peca(cod_peca),
-						quantidade integer);
+CREATE TABLE tbl_estoque (cod_compra serial primary key, cod_fornecedor integer references tbl_fornecedor(cod_fornecedor), cod_peca integer references tbl_peca(cod_peca), quantidade integer);
 						
 INSERT INTO tbl_fornecedor(nome,status,cidade) 
 VALUES ('A',30,'LONDRES'),('B',20,'PARIS'),('C',10,'PARIS'),('D',10,'LONDRES');
