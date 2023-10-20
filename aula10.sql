@@ -179,24 +179,64 @@ INSERT INTO tbl_empregados (nome, data_nascimento, endereco, sexo, salario, cod_
 ('Gustavo Gomes', '1986-09-25', 'Rua das Montanhas, 5432, Belo Horizonte, MG', 'M', 5700.00, 36),
 ('Lúcia Castro', '1990-05-19', 'Avenida das Árvores, 7890, Curitiba, PR', 'F', 5600.00, 36);
 
+-- exercicios
+
+
 --1 crie uma view chamada v_depcidade que liste o nome de cada departamento com o nome da cidade onde este departamento está localizado.
 --Após a criacao executar Select * from v_depcidade; retorna 36 linhas
+
+create view v_depcidade (nome_departamento,nome_cidade) as
+select tbl_departamentos.nome,tbl_cidades.nome
+from tbl_cidades 
+inner join tbl_departamentos on tbl_departamentos.cod_cidade=tbl_cidades.cod_cidade;
 
 
 --2 crie uma view denominada v_depcidadehouston, a partir de v_depcidade que mostre somente os departamentos localizados em Houston
 -- execute select * from v_depcidadehouston
 
+create view v_depcidadehouston(nome,cidade)as
+select tbl_departamentos.nome,tbl_cidades.nome
+from tbl_cidades
+inner join tbl_departamentos on tbl_departamentos.cod_cidade=tbl_cidades.cod_cidade
+where tbl_cidades.nome = 'Houston';
+
+
 
 --3 Crie uma visão denominada de v_opsalario, a qual lista a soma e média de todos os salários dos empregados.
 -- execute select * from v_opsalario
 
+create view v_opsalario(soma,media)as
+select salario,sum(salario), avg(salario)
+from tbl_empregados
+group by salario;
+
 
 --4 Criar a view vw_empregados_salarial que exibe o nome e o salário de todos os empregados com salário acima de 5500.
--- execute select * from v_empregados_salarial
+-- execute select * from vw_empregados_salarial
+
+create view vw_empregados_salarial (nome,salario) as
+select nome , salario
+from tbl_empregados
+where salario > 5500;
 
 
 --5 criar uma view v_departemp para listar os departamentos e a quantidade de empregados em cada um
 -- listar os departamentos e as quantidades por orderm decrescente de quantidade.
 
+create view v_departemp(departamento,numero_empregados) as
+select tbl_departamentos.nome,count(tbl_empregados.nome) as quantidade
+from tbl_empregados
+inner join tbl_departamentos on tbl_departamentos.cod_departamento=tbl_empregados.cod_departamento
+group by tbl_departamentos.nome
+order by quantidade desc;
+
 
 --6 criar uma view v_departrouble para listar os nomes dos departamentos que possuem mais projetos do que empregados.
+
+create view v_departrouble (departamento,quantidade,recursos)as
+select tbl_departamentos.nome,count(tbl_projetos.nome) as quantidade,count(tbl_empregados.nome) as recursos
+from tbl_departamentos
+left join  tbl_empregados on tbl_empregados.cod_departamento=tbl_departamentos.cod_departamento
+right join  tbl_projetos on tbl_projetos.cod_departamento=tbl_departamentos.cod_departamento
+group by tbl_departamentos.nome
+having count(tbl_projetos.nome) > count(tbl_empregados.nome);
